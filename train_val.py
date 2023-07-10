@@ -140,7 +140,9 @@ def main():
         if val_accurate > best_acc:
             best_acc = val_accurate
             torch.save(net.state_dict(), save_path)
-
+    matplot_loss(loss_train_val)
+    matplot_acc(acc_train_val)
+    
     print('Finished Training')
 
 
