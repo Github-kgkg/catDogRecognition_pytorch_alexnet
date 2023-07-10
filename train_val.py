@@ -77,25 +77,7 @@ def main():
     loss_function = nn.CrossEntropyLoss()
     optimizer = optim.Adam(net.parameters(), lr=0.0002)
 
-    def matplot_loss(train_val_loss):
-        plt.plot(train_val_loss, label='train_val_loss')
-        plt.legend(loc='best')
-        plt.ylabel('loss')
-        plt.xlabel('epoch')
-        plt.title("loss变化")
-        plt.show()
-
-    def matplot_acc(train_val_acc):
-        plt.plot(train_val_acc, label='train_val_acc')
-        plt.legend(loc='best')
-        plt.ylabel('acc')
-        plt.xlabel('epoch')
-        plt.title("acc变化图")
-        plt.show()
     
-    loss_train_val = []
-    acc_train_val = []
-
     save_path = './AlexNet.pth'
     best_acc = 0.0
     train_steps = len(train_loader)
@@ -134,15 +116,10 @@ def main():
         print('[epoch %d] train_loss: %.3f  val_accuracy: %.3f' %
               (epoch + 1, running_loss / train_steps, val_accurate))
 
-        loss_train_val.append(running_loss / train_steps)
-        acc_train_val.append(val_accurate)
-
         if val_accurate > best_acc:
             best_acc = val_accurate
             torch.save(net.state_dict(), save_path)
-    matplot_loss(loss_train_val)
-    matplot_acc(acc_train_val)
-    
+
     print('Finished Training')
 
 
